@@ -1,0 +1,65 @@
+.header{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+}
+.info{
+    display: flex;
+}
+.infocontainer{
+    text-align: start;
+    margin: auto;
+}
+
+.button{
+    background-color: transparent !important;
+    border: 1px solid #5B60FD;
+    color: #5B60FD;
+    padding: 9px 13px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+}
+.button.active{
+    background-color: #5B60FD !important;
+    color: #fff;
+}
+.actionscotainer{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 15px;
+}
+
+@media only screen and (max-width: 815px) {
+    .header{
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+    }
+    .infocontainer{
+        text-align: center;
+    }
+    .headervectorcontainer{
+        grid-column: 1/1;
+        grid-row: 2/1;
+        text-align: center;
+    }
+    .headervectorcontainer svg{
+        width: 500px;
+        height: 350px;
+    }
+}
+@media only screen and (max-width: 600px) {
+
+    .headervectorcontainer svg{
+        width: 400px;
+        height: 300px;
+    }
+}
+@media only screen and (max-width: 450px) {
+
+    .headervectorcontainer svg{
+        margin-top: 35px;
+        width: 280px;
+        height: 180px;
+    }
+}

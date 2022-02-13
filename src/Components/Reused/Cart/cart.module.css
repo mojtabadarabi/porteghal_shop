@@ -1,0 +1,81 @@
+.cardimage {
+    width: 100%;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+
+    margin-bottom: 8px;
+}
+
+.cardcontainer {
+    background-color: #fff;
+    border-radius: 8px;
+    user-select: none;
+}
+
+.cardcontainer h5 {
+    padding: 0;
+    margin: 0;
+}
+
+.actioncard {
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+    font-size: 24px;
+}
+
+.actionbtnscotainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.addbtn {
+    width: 90%;
+    font-size: 18px;
+    padding: 7px;
+    color: #fff;
+    border-radius: 8px;
+    margin: 8px 0;
+    background-color: #5B60FD;
+}
+
+.pricecontainer {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.discountedporice {
+    opacity: .5;
+    text-decoration: line-through;
+}
+
+.discount {
+    opacity: 1 !important;
+}
+
+.ratingcontainer {
+    margin: 8px;
+}
+
+.ratingcontainer svg:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red !important;
+    color: red !important;
+}
+
+.ratingcontainer22::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red !important;
+    color: red !important;
+}

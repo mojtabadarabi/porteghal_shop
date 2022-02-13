@@ -1,0 +1,33 @@
+.discountcontainer{
+    /* margin: 15px 0; */
+    text-align: center;
+}
+.discountcontainer h1{
+    margin: 15px 0;
+}
+.discountslidercontainer{
+    background-color: #F0E5F7;
+    overflow-y: hidden;
+    padding: 15px;
+    /* margin: 15px 0; */
+}
+.productcontainer{
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+    transition: all ease-in-out .4s;
+}
+.info{
+    background-color: white;
+    height: 400px;
+    border-radius: 8px;
+    transition: all ease-in-out .4s;
+}
+.discountslidercontainer.show .info{
+    transform: translateY(-400);
+}
+.discountslidercontainer.show .productcontainer{
+    transform: translateY(-400);
+}

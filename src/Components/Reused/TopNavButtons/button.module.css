@@ -1,0 +1,16 @@
+.navbtn{
+    border: 1px solid transparent;
+    padding: 6px 10px ;
+    color: #000;
+    margin: auto 3px;
+    font-size: 18px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all ease-in-out .4s;
+}
+.navbtn svg{
+    margin: 0 6px;
+}
+.navbtn:hover{
+
+}

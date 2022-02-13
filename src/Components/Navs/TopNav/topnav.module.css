@@ -1,0 +1,166 @@
+.nav{
+    display: flex;
+    justify-content: space-between   ;
+    align-items: center;
+    overflow: hidden;
+    position: fixed;
+    background-color: #fff;
+    width: 100%;
+    margin: 0;
+    top: 0;
+    background: #fff;
+    right: 0;
+    padding: 8px;
+    box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+.menucontainer{
+    display: flex;
+    justify-content: space-between   ;
+    align-items: center;
+    /* position: relative; */
+}
+.loginbtn{
+    border: none;
+    background-color: #5B60FD !important;
+    width: 100%;
+    padding: 7px 36px !important;
+    border-radius: 8px;
+    color:#fff;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    margin : 8px auto;
+}
+.actionscontainer {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+.cartcontainer svg{
+    /* position: absolute; */
+    top: 8px;
+    left: 0;
+    width: 30px;
+    height: 30px;
+}
+.burger{
+    width: 35px;
+    height: 3px;
+    background-color: rgba(0, 0, 0, .7);
+    border-radius: 15px;
+    margin:5px;
+    display: none;
+}
+.burgermenu{
+    margin: 0 15px;
+}
+
+.closebtncontainer{
+    display: none !important;
+    text-align: left;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.closebtncontainer h4{
+    padding: 0 !important;
+    margin: 0;
+}
+
+.closebtn{
+    border: none;
+    background-color: none;
+    background:none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    
+}
+.accountbutton{
+    border: .5px solid #000;
+    padding: 6px 10px ;
+    color: #000;
+    margin: auto 3px;
+    font-size: 18px;
+    background-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all ease-in-out .4s;
+}
+
+
+
+
+@media only screen and (max-width: 768px) {
+    .menu{
+        right: -100%;
+        background-color: #ECF9FF;
+        position: fixed;
+        top: 0;
+        width: 80%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        /* right: 0 !important; */
+        transition: all ease-in-out .6s;
+    }
+    .menu.ltr{
+        left: -100%;
+    }
+    .overlay{
+        position: fixed;
+        top: 0;
+        right:-100%;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        background-color: rgba(0, 0, 0, .5);
+        transition: all ease-in-out .8s;
+    }
+    .overlay.ltr{
+        left: -100% ;
+    }
+    .closebtn:active{
+        background-color: transparent !important;
+      }
+    .closebtncontainer{
+        display: flex !important;
+    }
+    .closebtncontainer svg{
+        animation: logo 2s infinite;
+    }
+    @keyframes logo {
+        0%{
+            transform: scale(1);
+        }
+        50%{
+            transform: scale(1.1);
+
+        }
+        100%{
+            transform: scale(1);
+
+        }
+    }
+    .menu.active{
+        right: 0;
+    }
+    .menu.ltr.active{
+        left: 0;
+    }
+    .overlay.active{
+        right:0;
+        opacity: 1;
+    }
+    .overlay.ltr.active{
+        left:0;
+    }
+    .burger{
+        display: block;
+    }
+    
+}
