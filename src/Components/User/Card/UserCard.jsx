@@ -1,0 +1,74 @@
+import Menu from "@mui/material/Menu";
+import ProductCard from "./ProductCard";
+import styles from './usercard.module.css'
+import { useState, useEffect } from "react";
+
+export default function UserCard({ anchorEl,open, handleClose }) {
+
+    const [menuwidth,setmenuwidth] = useState()
+    useEffect(() => {
+        checkWidth()
+    }, [window.innerWidth])
+    const checkWidth = ()=>{
+        if(window.innerWidth>700){
+            setmenuwidth(500)
+        }
+        else if(window.innerWidth>500){
+            setmenuwidth(400)
+        }
+        else{
+            setmenuwidth(250)
+        }
+    }
+  return (
+    <Menu
+    dir='rtl'
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
+      // onClick={handleClose}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+            width:`${menuwidth}px`,
+          background:'#ddd',
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+        //   ml:5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: 1.25,
+          },
+          "&:before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            left: 55,
+            width: 10,
+            height: 10,
+            bgcolor: "#ddd",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
+        },
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+        <div className={styles.rowcontainer}>
+            <div className={styles.row}>
+                <ProductCard/>
+
+            </div>
+           
+
+        </div>
+        <button type='button' className={`${styles.paymentbutton} ${styles.button}`}>
+            تسویه حساب
+        </button>
+    </Menu>
+  );
+}

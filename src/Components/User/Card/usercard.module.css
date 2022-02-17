@@ -1,0 +1,64 @@
+.cardRow{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    font-size: 10px;
+}
+.cell{
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+}
+.row{
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    margin: 8px 2px;
+}
+.rowcontainer{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.rowcontainer .row:last-child{
+    margin-bottom: 35px !important;
+}
+.button{
+    font-family: iransans, vazir, homa, "system-ui";
+    background: #5B60FD;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.paymentbutton{
+    width: 100%;
+    bottom: 0;
+    color: white;
+    position: fixed;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 800;
+}
+.iconbutton{
+    margin: auto 5px;
+    background: #ddd;
+    align-items: center;
+    display: flex;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #000;
+    font-weight: 800;
+}
+.countontainer{
+    display: flex;
+    align-items: center ;
+    margin:8px auto 0 auto;
+    text-align: center;
+    justify-content: center;
+}
+@media only screen and (min-width: 500px) {
+    .cardRow{
+        font-size:  18px;
+    }
+    
+}

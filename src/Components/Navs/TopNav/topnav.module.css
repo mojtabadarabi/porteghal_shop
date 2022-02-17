@@ -38,8 +38,13 @@
     position: relative;
     align-items: center;
 }
-.cartcontainer svg{
-    /* position: absolute; */
+
+.cardbutton{
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.cardbutton svg{
     top: 8px;
     left: 0;
     width: 30px;
@@ -106,6 +111,7 @@
         flex-direction: column;
         /* right: 0 !important; */
         transition: all ease-in-out .6s;
+        z-index: 1005;
     }
     .menu.ltr{
         left: -100%;
@@ -120,6 +126,7 @@
         display: flex;
         background-color: rgba(0, 0, 0, .5);
         transition: all ease-in-out .8s;
+        z-index: 1000;
     }
     .overlay.ltr{
         left: -100% ;
@@ -148,6 +155,7 @@
     }
     .menu.active{
         right: 0;
+
     }
     .menu.ltr.active{
         left: 0;

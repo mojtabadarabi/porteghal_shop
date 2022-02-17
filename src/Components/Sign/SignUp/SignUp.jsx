@@ -21,7 +21,7 @@ export default function SignUp() {
             password!==''&&password!==' '
         ){
             try {
-                await fetch('http://localhost:4000/api/register',{
+                await fetch(`${process.env.REACT_APP_BASE_URL}:4000/api/register`,{
                     method:'post',
                     headers:{
                         "Content-Type":"application/json",
@@ -34,7 +34,7 @@ export default function SignUp() {
                 setfullname('')
                 
             } catch (error) {
-                
+                alert(error)
             }
         }
         else{

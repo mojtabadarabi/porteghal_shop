@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import PublicLayout from "../Layout/Public/PublicLayout";
 import styles from "./singleproduct.module.css";
+import Rating from '@mui/material/Rating';
+import {AiOutlineHeart} from 'react-icons/ai'
+import {TiTick} from 'react-icons/ti'
+import ProductImage from "./ProductImage";
 
 export default function SingleProduct() {
   const { id } = useParams();
@@ -37,48 +41,60 @@ export default function SingleProduct() {
       return (
         <div className={styles.productcontainer}>
           <div className={styles.imagecontainer}>
-            <img
-              src={process.env.REACT_APP_BASE_URL + "/" + product.imageUrl}
-            />
+            <ProductImage images={product.imageUrl}/>
           </div>
           <div className={styles.infocontainer}>
-              <h4>
-              {product.title.falabel}
-
-              </h4>
-              {
-                  product.description.map(desc=>(
-                      <div className={styles.descriptioncontainer}>
-                          {desc.falabel}
-                      </div>
-                  ))
-              }
-              <hr/>
-            <span className={styles.categorylabel}>دسته بندی</span>
-              <div className={styles.categorycontainer}>
-                {
-                    product.category.map(category=>(
-                        <span className={styles.category}>
-                            {category.falabel}
-                        </span>
-                    ))
-                }
-
-              </div>
-          </div>
-          <div className={styles.paymentcontainer}>
+            <div className={styles.titlecontainer}>
+              {product.discountedPrice !== null ? (
+                <div className={styles.discountedpricecontainer}>
+                  <span>{product.discountedPrice}تومان</span>
+                  <span>{product.price}تومان</span>
+                </div>
+              ) : (
+                <div className={styles.discountedpricecontainer}>
+                  <span>{product.price}تومان</span>
+                </div>
+              )}
+              <h3>{product.title.falabel}</h3>
+            </div>
+            <div className={styles.ratingcontainer}>
+              <Rating name="read-only" value={3} readOnly />
+              <span>{15} </span>
+              <span>نظر</span>
+            </div>
             <div className={styles.optionscontainer}>
-                {
-                    product.options.map(option=>(
-                        <span className={styles.option}>
-                            {option.falabel}
-                        </span>
-                    ))
-                }
-
-              </div>
-              <button className={`${styles.actioncard} ${styles.addbtn}`}>خرید نهایی</button>
+              {product.options.map((option) => (
+                <span className={styles.option}><TiTick/>{option.falabel}</span>
+              ))}
+              {product.options.map((option) => (
+                <span className={styles.option}><TiTick/>{option.falabel}</span>
+              ))}
+            </div>
+            <div className={styles.descriptioncontainer}>
+              <p>توضیحات </p>
+              <p>
+                {product.info.falabel}
+              </p>
+            </div>
+            <span className={styles.categorylabel}>دسته بندی</span>
+            <div className={styles.categorycontainer}>
+              {product.category.map((category) => (
+                <span className={styles.category}>{category.falabel}</span>
+              ))}
+              {product.category.map((category) => (
+                <span className={styles.category}>{category.falabel}</span>
+              ))}
+            </div>
+            <div className={styles.actionbuttons}>
+                <button type='button' >
+                  افزودن به سبد خرید
+                </button>
+                <button type='button' >
+                  <AiOutlineHeart/>
+                </button>
+            </div>
           </div>
+          
         </div>
       );
     }

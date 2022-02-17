@@ -38,7 +38,7 @@ function Cart({
                 <button className={styles.actioncard}><BsShareFill/></button>
                 <button className={styles.actioncard}><FcLikePlaceholder/></button>
             </div>
-            <div className={styles.cardimage} style={{backgroundImage: `url(${process.env.REACT_APP_BASE_URL+'/'+image})`}}/>
+            <div className={styles.cardimage} style={{backgroundImage: `url(${'http://192.168.1.5:4000'+'/'+image})`}}/>
             <h5>{title.falabel.substring(0,25)}</h5>
             
             <div  className={styles.pricecontainer}>

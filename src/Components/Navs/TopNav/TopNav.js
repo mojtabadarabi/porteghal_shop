@@ -9,6 +9,7 @@ import {AiOutlineUser} from 'react-icons/ai'
 import { useLanguage } from '../../../Providers/LangProvider/LangProvider'
 import { Link } from 'react-router-dom'
 import AccountMenu from '../../Menus/AccountMenu/AccountMenu'
+import UserCard from '../../User/Card/UserCard'
 
 function TopNav() {
     const burgerRef = useRef(null)
@@ -21,13 +22,21 @@ function TopNav() {
         payment,
         loginlabel,
     }} = useLanguage()
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    const [anchorElAccount, setanchorElAccount] = useState(null);
+    const openAccount = Boolean(anchorElAccount);
+    const [anchorElCard, setanchorElCard] = useState(null);
+    const openCard = Boolean(anchorElCard);
     const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+        setanchorElAccount(event.currentTarget);
     };
     const handleClose = () => {
-      setAnchorEl(null);
+        setanchorElAccount(null);
+    };
+    const handleClickCard = (event) => {
+        setanchorElCard(event.currentTarget);
+    };
+    const handleCloseCard = () => {
+        setanchorElCard(null);
     };
     const user = JSON.parse(localStorage.getItem('user'))
     useEffect(() => {
@@ -85,11 +94,14 @@ function TopNav() {
             </div>
 
                 <div className={styles.actionscontainer}>
-                    <NavButton to='/cart' style={{padding:'6px 0'}}>
-                        <span className={styles.cartcontainer}>
-                            <Cart/> 
-                        </span>
-                    </NavButton>
+                    <button onClick={handleClickCard} type='button' className={styles.cardbutton}>
+                        <Cart/> 
+                    </button>
+                    <UserCard
+                        open={openCard} 
+                        handleClose={handleCloseCard}
+                        anchorEl={anchorElCard}
+                    />
                     {
                         user!==null?(
                             <button onClick={handleClick} type='button' className={styles.accountbutton}>
@@ -103,9 +115,9 @@ function TopNav() {
                         )
                     }
                     <AccountMenu 
-                        open={open} 
+                        open={openAccount} 
                         handleClose={handleClose}
-                        anchorEl={anchorEl}
+                        anchorEl={anchorElAccount}
                     />
             </div>
         </nav>

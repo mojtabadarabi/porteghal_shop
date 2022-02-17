@@ -1,0 +1,30 @@
+
+.swiper {
+  width: 400px;
+  height: 500px;
+}
+
+.swiperslides {
+  display: flex;
+  user-select: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+@media only screen and (max-width: 490px) {
+  .swiper {
+    width: 310px;
+    height: 400px;
+  }
+  
+}
+@media only screen and (max-width: 360px) {
+  .swiper {
+    width: 200px;
+    height: 272px;
+  }
+  
+}
