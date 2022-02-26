@@ -12,6 +12,7 @@ import styles from "./swiper.module.css";
 import { EffectCards } from "swiper";
 
 export default function ProductImage({images}) {
+  console.log(images)
   return (
     <>
       <Swiper
@@ -20,16 +21,17 @@ export default function ProductImage({images}) {
         modules={[EffectCards]}
         className={styles.swiper}
       >
-        <SwiperSlide className={styles.swiperslides}>
-            <img
-              src={'http://192.168.1.5:4000' + "/" + images}
-            />
-        </SwiperSlide>
-        <SwiperSlide className={styles.swiperslides}>
-            <img
-              src={'http://192.168.1.5:4000' + "/" + images}
-            />
-        </SwiperSlide>
+        
+        {
+          images.map(image=>(
+              <SwiperSlide className={styles.swiperslides}>
+                  <img
+                    src={'http://192.168.1.5:4000' + "/images/" + image}
+                  />
+              </SwiperSlide>
+
+          ))
+        }
         
       </Swiper>
     </>

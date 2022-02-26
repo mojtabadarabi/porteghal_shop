@@ -132,6 +132,12 @@ html {
   height: 5px;
   background-color: #cccccc;
 }
+*{
+  font-family: iransans, vazir, homa, "system-ui";
+}
+button,li{
+  font-family: iransans, vazir, homa, "system-ui";
+}
 img{
   user-drag: none;
   -webkit-user-drag: none;

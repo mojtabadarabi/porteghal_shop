@@ -3,8 +3,10 @@ import { fetchAllProduct } from "../Discounts/apiCals";
 import Cart from "../Reused/Cart/Cart";
 import styles from "./products.module.css";
 import Category from "./Category";
+import { useLang } from "../../Providers/LangProvider/LangProvider";
 
 export default function AllProducts() {
+  const lang = useLang()
   const [products, setproducts] = useState(null);
   useEffect(() => {
     getAllCategories();
@@ -14,6 +16,7 @@ export default function AllProducts() {
       const data = await fetch("http://localhost:4000/api/products", {
         method: "get",
         headers: {
+          lang:lang,
           Accept: "application/json",
           "Content-type": "application/json",
         },
@@ -24,7 +27,6 @@ export default function AllProducts() {
       console.log(error);
     }
   };
-
   const renderProducts = () => {
     if (products === null) {
       return <div>Loading...</div>;

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react'
 import styles from "./products.module.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import { useLang } from '../../Providers/LangProvider/LangProvider';
 
 export default function Category() {
+    const lang = useLang()
     const [itemsshowslider, setitemsshowslider] = useState(8)
     const [categorySelected, setcategorySelected] = useState('all')
     const [categores, setcategores] = useState([])
@@ -15,6 +17,7 @@ export default function Category() {
             const data = await fetch('http://localhost:4000/api/categories',{
                 method: 'get',
                 headers: {
+                    'lang':lang,
                   'Accept': 'application/json',
                   'Content-type': 'application/json',
                 },
@@ -41,10 +44,10 @@ export default function Category() {
     }
 
     window.addEventListener("resize", handleClickOutside);
-
-useEffect(() => {
-    handleClickOutside()
-}, [])
+    useEffect(() => {
+        handleClickOutside()
+    }, [])
+    console.log(categores)
     function renderCategores() {
         return (
             categores.map((category,index)=>(
@@ -53,7 +56,7 @@ useEffect(() => {
                    onClick={()=>setcategorySelected(category.title)} 
                    className={category?.title===categorySelected?styles.categoryselected:null}
                   >
-                      {category.falabel}
+                      {category.value}
                     </div>
               </SwiperSlide>
           )) 

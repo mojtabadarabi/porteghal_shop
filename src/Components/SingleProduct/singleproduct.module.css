@@ -29,7 +29,10 @@ hr{
     font-size: 24px;
     color: rgb(255, 195, 1);
 }
-.discountedpricecontainer :nth-child(2){
+.favorite svg{
+    color: red;
+}
+.discountedpricecontainer :nth-child(2).discounted{
     font-size: 18px;
     opacity: .7;
     text-decoration: line-through;

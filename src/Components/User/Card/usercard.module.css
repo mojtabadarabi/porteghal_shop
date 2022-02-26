@@ -2,11 +2,13 @@
     display: grid;
     grid-template-columns: repeat(3,1fr);
     font-size: 10px;
+    align-items: center;
 }
 .cell{
     justify-content: center;
     text-align: center;
     white-space: nowrap;
+
 }
 .row{
     padding: 15px;
@@ -17,6 +19,10 @@
 .rowcontainer{
     max-height: 400px;
     overflow-y: scroll;
+}
+.image img{
+    width: 100%;
+    height: 100%;
 }
 .rowcontainer .row:last-child{
     margin-bottom: 35px !important;

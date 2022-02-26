@@ -2,9 +2,11 @@ import Compose from "./Routes/Compose";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 import LangProvider from "./Providers/LangProvider/LangProvider";
+import UserCartProvider from "./Providers/UserCart/UserCart";
 
 const providers = [
   LangProvider,
+  UserCartProvider
 ];
 
 function AppContext() {
