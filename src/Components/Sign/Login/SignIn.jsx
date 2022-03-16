@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import styles from './signin.module.css'
 import {BsTwitter} from 'react-icons/bs'
-import PublicLayout from '../../Layout/Public/PublicLayout'
 import FormInput from '../../Reused/FormInput/FormInput'
 import FormButton from '../../Reused/FormButton/FormButton'
 import { Link, useNavigate } from 'react-router-dom'
 import {ReactComponent as Logo} from '../../../Assets/icons/logo.svg'
+import customAxios from '../../../Hooks/UseAxios'
 
 export default function SignIn() {
-
+    const axios = customAxios()
     const [password,setpassword] = useState('')
     const [email,setemail] = useState('')
     const navigate = useNavigate()
@@ -19,16 +19,7 @@ export default function SignIn() {
             password!==''&&password!==' '
         ){
             try {
-                const data = await fetch('http://localhost:4000/api/login',{
-                    method: 'post',
-                    headers: {
-                      'Accept': 'application/json',
-                      'Content-type': 'application/json',
-                    },
-                    body:JSON.stringify({email,password})
-                })
-                const {token,user} = await data.json()
-                console.log(user)
+                const {token,user} = await axios('login','post',{email,password})
                 localStorage.setItem('token',token)
                 localStorage.setItem('user',JSON.stringify(user))
                 navigate('/')
@@ -43,7 +34,6 @@ export default function SignIn() {
         }
     }
     return (
-        <PublicLayout>
             <section className={styles.container}>
                 <Logo className={styles.logo}/>
                 <form onSubmit={handleSubmitForm} className={styles.form}>
@@ -82,6 +72,5 @@ export default function SignIn() {
                 </div>
             </section>
 
-        </PublicLayout>
     )
 }

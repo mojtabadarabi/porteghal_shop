@@ -26,7 +26,7 @@ export default function ProductImage({images}) {
           images.map(image=>(
               <SwiperSlide className={styles.swiperslides}>
                   <img
-                    src={'http://192.168.1.5:4000' + "/images/" + image}
+                    src={'http://localhost:4000' + "/images/" + image}
                   />
               </SwiperSlide>
 

@@ -3,8 +3,10 @@ import styles from "./products.module.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import { useLang } from '../../Providers/LangProvider/LangProvider';
+import customAxios from '../../Hooks/UseAxios'
 
 export default function Category() {
+    const axios = customAxios()
     const lang = useLang()
     const [itemsshowslider, setitemsshowslider] = useState(8)
     const [categorySelected, setcategorySelected] = useState('all')
@@ -14,15 +16,7 @@ export default function Category() {
     }, [])
     const getAllCategories=async()=>{
         try {
-            const data = await fetch('http://localhost:4000/api/categories',{
-                method: 'get',
-                headers: {
-                    'lang':lang,
-                  'Accept': 'application/json',
-                  'Content-type': 'application/json',
-                },
-            })
-            const {Categories} = await data.json()
+            const {Categories} = await axios('categories','get')
             setcategores(Categories)
         } catch (error) {
             console.log(error)
@@ -47,7 +41,6 @@ export default function Category() {
     useEffect(() => {
         handleClickOutside()
     }, [])
-    console.log(categores)
     function renderCategores() {
         return (
             categores.map((category,index)=>(

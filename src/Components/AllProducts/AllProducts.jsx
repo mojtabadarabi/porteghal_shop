@@ -3,29 +3,18 @@ import { fetchAllProduct } from "../Discounts/apiCals";
 import Cart from "../Reused/Cart/Cart";
 import styles from "./products.module.css";
 import Category from "./Category";
-import { useLang } from "../../Providers/LangProvider/LangProvider";
+import customAxios from '../../Hooks/UseAxios'
 
 export default function AllProducts() {
-  const lang = useLang()
+  const axios = customAxios()
   const [products, setproducts] = useState(null);
-  useEffect(() => {
+  useEffect(async() => {
     getAllCategories();
   }, []);
   const getAllCategories = async () => {
-    try {
-      const data = await fetch("http://localhost:4000/api/products", {
-        method: "get",
-        headers: {
-          lang:lang,
-          Accept: "application/json",
-          "Content-type": "application/json",
-        },
-      });
-      const {products} = await data.json();
+      const {products} = await axios('products','get')
+
       setproducts(products)
-    } catch (error) {
-      console.log(error);
-    }
   };
   const renderProducts = () => {
     if (products === null) {

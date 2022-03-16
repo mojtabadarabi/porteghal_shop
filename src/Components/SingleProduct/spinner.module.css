@@ -1,0 +1,12 @@
+.spinnercontainer{
+    padding:50px;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center;
+    text-align: center;
+    color: coral;
+}
+.spinner{
+    margin:auto;
+}

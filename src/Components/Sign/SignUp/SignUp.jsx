@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styles from './signup.module.css'
 import {BsTwitter} from 'react-icons/bs'
-import PublicLayout from '../../Layout/Public/PublicLayout'
 import FormInput from '../../Reused/FormInput/FormInput'
 import FormButton from '../../Reused/FormButton/FormButton'
 import { Link, useNavigate } from 'react-router-dom'
@@ -21,7 +20,7 @@ export default function SignUp() {
             password!==''&&password!==' '
         ){
             try {
-                await fetch(`${process.env.REACT_APP_BASE_URL}:4000/api/register`,{
+                await fetch(`${process.env.REACT_APP_BASE_URL}/api/register`,{
                     method:'post',
                     headers:{
                         "Content-Type":"application/json",
@@ -42,7 +41,6 @@ export default function SignUp() {
         }
     }
     return (
-        <PublicLayout>
             <section className={styles.container}>
                 <Logo className={styles.logo}/>
                 <form onSubmit={handleSubmitForm} className={styles.form}>
@@ -90,7 +88,5 @@ export default function SignUp() {
                     </Link>
                 </div>
             </section>
-
-        </PublicLayout>
     )
 }

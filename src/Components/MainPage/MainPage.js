@@ -12,14 +12,14 @@ import Footer from '../Footer/Footer'
 function MainPage() {
     return (
         <main className={styles.container}>
-            <TopNav/>
+            {/* <TopNav/> */}
             <Slider/>
             <Discounts/>
             <AllProducts/>
             <PaymentMethods/>
             <Support/>
             <Reminders/>
-            <Footer/>
+            {/* <Footer/> */}
         </main>
     )
 }

@@ -31,6 +31,7 @@ function Cart({
         } 
         return newValue
     }
+    console.log('cart================')
     const navigate = useNavigate()
     return (
         <div className={styles.cardcontainer}>
@@ -38,7 +39,7 @@ function Cart({
                 <button className={styles.actioncard}><BsShareFill/></button>
                 <button className={styles.actioncard}><FcLikePlaceholder/></button>
             </div>
-            <div className={styles.cardimage} style={{backgroundImage: `url(${'http://192.168.1.5:4000'+'/'+'images/'+image[0]})`}}/>
+            <div className={styles.cardimage} style={{backgroundImage: `url(${'http://localhost:4000'+'/'+'images/'+image[0]})`}}/>
             <h5>{title.substring(0,25)}</h5>
             
             <div  className={styles.pricecontainer}>

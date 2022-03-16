@@ -41,8 +41,8 @@ const routes = [
     {
       id:0,
         exact: true,
-        private: false,
-        path: "/admin/createproduct",
+        private: true,
+        path: "/admin",
         element: <CreateProduct/>,
         shouldmax: true,
       },

@@ -16,7 +16,7 @@ export default function ProductCard({product}) {
         <div className={styles.cardRow}>
             <div className={`${styles.cell} ${styles.image}`}>
                     <img
-                    src={'http://192.168.1.5:4000' + "/images/" + product.imageUrl[0]}
+                    src={'http://localhost:4000' + "/images/" + product.imageUrl[0]}
                   />
             </div>
             <div className={`${styles.cell} ${styles.info}`}>

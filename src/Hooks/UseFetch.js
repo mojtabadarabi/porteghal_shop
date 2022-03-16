@@ -1,28 +1,23 @@
-import {useEffect} from "react";
-import {useLang} from "../Providers/LangProvider/LangProvider";
+import { useLang } from "../Providers/LangProvider/LangProvider";
 
-const useClosureFetch = (url) => {
-  const BASE_URL = url || process.env.REACT_APP_BASE_URL + "/api/";
-  const myAbortController = new AbortController();
-  const lang = useLang()
-
-
-  useEffect(() => {
-    return () => myAbortController.abort();
-  }, []);
-
-  async function fetch(url,options={}) {
-    options.signal = myAbortController.signal
-    options.header = {...options.header,lang:lang}
-    try {
-      return await fetch(BASE_URL + url, options)
-    } catch (err) {
-      console.log(err);
-    //   throw err;
+export const UseFetch=async(url,method,headers,inBody,lang)=>{
+    // const lang = useLang()
+    let baseUrl = process.env.REACT_APP_BASE_URL ;
+    const fetchUrl = baseUrl+'/api/'+url
+    const fetchHeaders={
+        ...headers,
+        "Content-type": "application/json",
+        "lang":lang
     }
-  }
-
-  return fetch;
-};
-
-export default useClosureFetch;
+    try {
+        const data = await fetch(fetchUrl,{
+            headers:fetchHeaders,
+            method,
+            body:method!=='get'?JSON.stringify(inBody):null
+        })
+        return await data.json()
+        
+    } catch (error) {
+        console.log(error)
+    }
+}

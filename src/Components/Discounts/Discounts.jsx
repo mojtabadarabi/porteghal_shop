@@ -1,86 +1,112 @@
-import React, { useEffect, useRef, useState } from 'react'
-import styles from './discount.module.css'
-import shoe1 from '../../Assets/products/shoes1.jpg'
-import product1 from '../../Assets/products/product(1).jpg'
-import product2 from '../../Assets/products/product(2).jpg'
-import product3 from '../../Assets/products/product(3).jpg'
-import product4 from '../../Assets/products/product(4).jpg'
-import product5 from '../../Assets/products/product(5).jpg'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import Cart from '../Reused/Cart/Cart'
-import { fetchAllProduct } from './apiCals'
+import React, { useEffect, useState } from "react";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
+import customAxios from "../../Hooks/UseAxios";
+import Cart from "../Reused/Cart/Cart";
+import SpinnerLoading from "../SingleProduct/SpinnerLoading";
+import styles from "./discount.module.css";
 
 function Discounts() {
-    const [itemsshowslider, setitemsshowslider] = useState(3)
-    const [discountProducts, setdiscountProducts] = useState([])
-    function handleClickOutside() {
-        if(window.innerWidth<600){
-            setitemsshowslider(1)
-        }
-        else if(window.innerWidth<850){
-            setitemsshowslider(2)
-        }
-        else if(window.innerWidth<1150){
-            setitemsshowslider(3)
-        }
-        else{
-            setitemsshowslider(4)
-        }
+  const axios = customAxios();
+  const [itemsshowslider, setitemsshowslider] = useState(3);
+  const [discountProducts, setdiscountProducts] = useState([]);
+  const [error, seterror] = useState(null);
+  const [loading, setloading] = useState(false);
+  useEffect(async () => {
+      if(discountProducts.length===0){
+          try {
+            setloading(true);
+            const { products } = await axios("discounts", "get");
+            seterror(null)
+            setdiscountProducts(products);
+          } catch (error) {
+            seterror('مشکلی پیش آمده است');
+          } finally {
+            setloading(false);
+          }
+
+      }
+    handleClickOutside();
+  }, []);
+  function handleClickOutside() {
+    if (window.innerWidth < 600) {
+      setitemsshowslider(1);
+    } else if (window.innerWidth < 850) {
+      setitemsshowslider(2);
+    } else if (window.innerWidth < 1150) {
+      setitemsshowslider(3);
+    } else {
+      setitemsshowslider(4);
     }
+  }
 
-    window.addEventListener("resize", handleClickOutside);
+  window.addEventListener("resize", handleClickOutside);
 
-useEffect(async() => {
-    // const res=await fetchAllProduct()
-    // setdiscountProducts(res)
-    handleClickOutside()
-}, [])
-    function renderProducts() {
-        return (
-            
-                discountProducts&&discountProducts.length!==0?(
-                    discountProducts.map((product,index)=>(
-                        <SwiperSlide key={index}>
-                            <Cart 
-                              id={product.id}
-                              key={product.id}
-                              image={product.image}
-                              title={product.title}
-                              discount={product?.discount}
-                              price={product.price}
-                            />
-                        </SwiperSlide>
-                    )) 
-
-                ):null
-            
-        )
+    const renderProducts = ()=>{
+      console.log('renderp====')
+    if (loading) {
+      return (
+        <div>
+          <SpinnerLoading />
+        </div>
+      );
+    } else if (error !== null) {
+      return <div>{error}</div>;
     }
-    return (
-        <section className={styles.discountcontainer}>
-            <h1>از تخفیف چه خبر</h1>
-            <div className={styles.discountslidercontainer} >
-                <Swiper
-                className={styles.discountslidercontainer}
-                dir={'rtl'} 
-                spaceBetween={45}
-                slidesPerView='auto'
-                freeMode
-                breakpoints={{}}
-                slidesPerView={itemsshowslider}
-                loop={true}
-                onSwiper={(swiper) => {
-                }}  
-                onSlideChange={(swiper) => {
-                }}
-                >
-                    {renderProducts()}
-                </Swiper>
-
-            </div>
-        </section>
-    )
+    else if (
+        loading===false &&
+      error === null &&
+      discountProducts &&
+      discountProducts.length === 0
+    ) {
+      return <div>محصولی موجود نیست</div>;
+    } else 
+    if (
+        loading===false &&
+        error === null &&
+        discountProducts &&
+        discountProducts.length !== 0
+      ) {
+      return discountProducts.map((product, index) => (
+        <SwiperSlide key={index}>
+          <Cart
+            id={product?._id}
+            key={product?._id}
+            image={product?.imageUrl}
+            category={product?.category}
+            description={product?.description}
+            options={product?.options}
+            title={product?.title}
+            discount={product?.discount}
+            discountedPrice={product?.discountedPrice}
+            price={product?.price}
+            count={product?.count}
+          />
+        </SwiperSlide>
+      ));
+    }
+  }
+  return (
+    <section className={styles.discountcontainer}>
+      <h1>از تخفیف چه خبر</h1>
+      <div className={styles.discountslidercontainer}>
+        <Swiper
+          className={styles.discountslidercontainer}
+          dir={"rtl"}
+          spaceBetween={45}
+          slidesPerView="auto"
+          freeMode
+          breakpoints={{}}
+          slidesPerView={itemsshowslider}
+          loop={true}
+          onSwiper={(swiper) => {}}
+          onSlideChange={(swiper) => {}}
+        >
+          {renderProducts()}
+        </Swiper>
+      </div>
+    </section>
+  );
 }
 
-export default Discounts
+export default Discounts;

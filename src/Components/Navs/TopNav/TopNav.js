@@ -10,6 +10,8 @@ import { useLanguage } from '../../../Providers/LangProvider/LangProvider'
 import { Link } from 'react-router-dom'
 import AccountMenu from '../../Menus/AccountMenu/AccountMenu'
 import UserCard from '../../User/Card/UserCard'
+import SearchBar from '../SearchBar/SearchBar'
+import ChangeLanguage from '../../Reused/ChangeLanguage/ChangeLanguage'
 
 function TopNav() {
     const burgerRef = useRef(null)
@@ -63,6 +65,8 @@ function TopNav() {
         overlayRef.current.classList.add(styles.active)
     }
     return (
+        <div className={styles.container}>
+        <SearchBar/>
         <nav className={styles.nav}>
             <div  className={styles.menucontainer}>
                 <div className={styles.logocontainer}>
@@ -84,6 +88,9 @@ function TopNav() {
                         <button className={styles.closebtn} onClick={closeMenu}>
                             <AiOutlineClose/>
                         </button>
+                    </div>
+                    <div className={`${styles.closebtncontainer} ${styles.changelanguagecontaier}`}>
+                        <ChangeLanguage/>
                     </div>
                     <NavButton to='/'>{homelabel}</NavButton>
                     <NavButton to='/'>{productslabel}</NavButton>
@@ -121,7 +128,9 @@ function TopNav() {
                     />
             </div>
         </nav>
-    )
+
+        </div>
+            )
 }
 
 export default TopNav

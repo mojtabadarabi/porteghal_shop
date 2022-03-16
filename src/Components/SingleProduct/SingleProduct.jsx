@@ -1,54 +1,31 @@
+import Rating from "@mui/material/Rating";
 import React, { useEffect, useState } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { TiTick } from "react-icons/ti";
 import { useParams } from "react-router";
-import PublicLayout from "../Layout/Public/PublicLayout";
-import styles from "./singleproduct.module.css";
-import Rating from '@mui/material/Rating';
-import {AiOutlineHeart} from 'react-icons/ai'
-import {TiTick} from 'react-icons/ti'
-import ProductImage from "./ProductImage";
+import customAxios from "../../Hooks/UseAxios";
 import { useUserCardDispatcher } from "../../Providers/UserCart/UserCart";
-import axios from 'axios'
-import { useLang } from "../../Providers/LangProvider/LangProvider";
+import PublicLayout from "../Layout/Public/PublicLayout";
+import ProductImage from "./ProductImage";
+import styles from "./singleproduct.module.css";
+import SpinnerLoading from "./SpinnerLoading";
 
 export default function SingleProduct() {
-  const lang = useLang()
+  const axios = customAxios();
   const { id } = useParams();
   const [product, setproduct] = useState(null);
   const [error, seterror] = useState(null);
-  const dispatch = useUserCardDispatcher()
+  const dispatch = useUserCardDispatcher();
   useEffect(() => {
     getSibngleProduct();
   }, []);
   const getSibngleProduct = async () => {
     try {
-      const {data:{product}}= await axios.get(`http://localhost:4000/api/products/${id}`,{
-        headers: {
-          "lang":lang,
-          "Content-type": "application/json",
-        },
-      })
-      setproduct(product);
-      seterror(null);
+      const { product }= await axios(`products/${id}`, "get");
+          setproduct(product);
+          seterror(null);
+          
     } catch (error) {
-      seterror("مشکلی پیش آمده است");
-    }
-  };
-  const hendleAddToFavorites = async () => {
-    try {
-      const data = await fetch(`http://localhost:4000/api/product/${id}`, {
-        method: "put",
-        credentials: 'include',
-        mode: 'no-cors',
-        headers: {
-
-          "Content-type": "application/json",
-        },
-      });
-      const { product } = await data.json();
-      setproduct(product);
-      seterror(null);
-    } catch (error) {
-      console.log(error)
       seterror("مشکلی پیش آمده است");
     }
   };
@@ -56,12 +33,12 @@ export default function SingleProduct() {
     if (error !== null) {
       return <div>error</div>;
     } else if (error === null && product === null) {
-      return <div>loading</div>;
+      return <SpinnerLoading/>;
     } else if (error === null && product !== null) {
       return (
         <div className={styles.productcontainer}>
           <div className={styles.imagecontainer}>
-            <ProductImage images={product.imageUrl}/>
+            <ProductImage images={product.imageUrl} />
           </div>
           <div className={styles.infocontainer}>
             <div className={styles.titlecontainer}>
@@ -84,17 +61,21 @@ export default function SingleProduct() {
             </div>
             <div className={styles.optionscontainer}>
               {product.options.map((option) => (
-                <span className={styles.option}><TiTick/>{option}</span>
+                <span className={styles.option}>
+                  <TiTick />
+                  {option}
+                </span>
               ))}
               {product.options.map((option) => (
-                <span className={styles.option}><TiTick/>{option}</span>
+                <span className={styles.option}>
+                  <TiTick />
+                  {option}
+                </span>
               ))}
             </div>
             <div className={styles.descriptioncontainer}>
               <p>توضیحات </p>
-              <p>
-                {product.info}
-              </p>
+              <p>{product.info}</p>
             </div>
             <span className={styles.categorylabel}>دسته بندی</span>
             <div className={styles.categorycontainer}>
@@ -106,15 +87,22 @@ export default function SingleProduct() {
               ))}
             </div>
             <div className={styles.actionbuttons}>
-                <button type='button' onClick={()=>dispatch({type:"ADD_PRODUCT",payload:product})}>
-                  افزودن به سبد خرید
-                </button>
-                <button type='button' className={product.isfavorite?styles.favorite:null} onClick={hendleAddToFavorites}>
-                  <AiOutlineHeart/>
-                </button>
+              <button
+                type="button"
+                onClick={() =>
+                  dispatch({ type: "ADD_PRODUCT", payload: product })
+                }
+              >
+                افزودن به سبد خرید
+              </button>
+              <button
+                type="button"
+                className={product.isfavorite ? styles.favorite : null}
+              >
+                <AiOutlineHeart />
+              </button>
             </div>
           </div>
-          
         </div>
       );
     }

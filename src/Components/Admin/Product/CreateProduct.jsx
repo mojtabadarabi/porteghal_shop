@@ -34,6 +34,8 @@ export default function CreateProduct() {
         form.append('comments[0][en]',"good product")
 
         form.append('price',2000)
+        // form.append('discount',10)
+        // form.append('discountedPrice',1800)
         console.log(images)
         images.map((image,index)=>[
             form.append('imageUrl',images[index])
